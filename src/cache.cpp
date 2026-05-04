@@ -15,11 +15,11 @@ bool Cache :: access(int address){
     int index = address % size ;
 
     if(lines[index].valid && lines[index].tag == address){
-        return true // hit case
+        return true; // hit case
     }
 
     lines[index].tag = address ;
     lines[index].valid = true ;
 
-    return false // miss case
+    return false; // miss case
 }
