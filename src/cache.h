@@ -17,6 +17,7 @@ private:
 public:
     Cache(int size);        // creates a cache block with this constructor of size size
     bool access(int address);   // this function is for 
+    vector<CacheLine> getCache();
 };
 
 #endif

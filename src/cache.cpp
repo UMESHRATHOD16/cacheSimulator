@@ -23,3 +23,7 @@ bool Cache :: access(int address){
 
     return false; // miss case
 }
+
+vector<CacheLine> Cache::getCache() {
+    return lines;
+}

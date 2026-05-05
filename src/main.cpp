@@ -20,10 +20,25 @@ int main() {
         cout << addr << " -> " << (isHit ? "Hit" : "Miss") << endl;
 
         if (isHit) hits++;
+
+            vector<CacheLine> current = cache.getCache();
+
+    cout << "Cache: ";
+    for (int i = 0; i < cacheSize; i++) {
+        cout << "[";
+        if (current[i].valid)
+            cout << current[i].tag;
+        else
+            cout << "-";
+        cout << "] ";
+    }
+    cout << endl;
     }
 
     cout << "\nTotal Hits: " << hits << endl;
     cout << "Hit Rate: " << (float)hits / access.size() << endl;
+
+
 
     return 0;
 }
