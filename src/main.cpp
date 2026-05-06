@@ -5,8 +5,9 @@ using namespace std;
 
 int main() {
     int cacheSize = 4;
+    int blockSize = 4;
 
-    Cache cache(cacheSize);
+    Cache cache(cacheSize, blockSize);
 
     vector<int> access = {1, 2, 3, 1, 4, 5};
 
@@ -15,9 +16,22 @@ int main() {
     cout << "Access sequence:\n";
 
     for (int addr : access) {
-        bool isHit = cache.access(addr);
 
-        cout << addr << " -> " << (isHit ? "Hit" : "Miss") << endl;
+        bool isHit = cache.access(addr);
+        int offset = addr % blockSize;
+        int blockNumber = addr / blockSize;
+        int index = blockNumber % cacheSize;
+        int tag = blockNumber / cacheSize;
+
+        cout << "\nAddress: " << addr << endl;
+
+        cout << "Block Number: " << blockNumber << endl;
+
+        cout << "Tag: " << tag
+            << " | Index: " << index
+            << " | Offset: " << offset << endl;
+
+        cout << (isHit ? "Cache HIT" : "Cache MISS") << endl;
 
         if (isHit) hits++;
 

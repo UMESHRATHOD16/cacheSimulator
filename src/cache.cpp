@@ -1,7 +1,8 @@
 #include "cache.h"
 
-Cache :: Cache(int size){
+Cache::Cache(int size, int blockSize) {
     this->size = size ;
+    this->blockSize = blockSize;
 
     lines.resize(size);
 
@@ -12,13 +13,17 @@ Cache :: Cache(int size){
 }
 
 bool Cache :: access(int address){
-    int index = address % size ;
 
-    if(lines[index].valid && lines[index].tag == address){
+    int offset = address % blockSize;
+    int blockNumber = address / blockSize;
+    int index = blockNumber % size;
+    int tag = blockNumber / size;
+
+    if(lines[index].valid && lines[index].tag == tag){
         return true; // hit case
     }
 
-    lines[index].tag = address ;
+    lines[index].tag = tag;
     lines[index].valid = true ;
 
     return false; // miss case
