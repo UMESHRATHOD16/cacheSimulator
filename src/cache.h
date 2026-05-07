@@ -13,12 +13,13 @@ class Cache {   // this is whole cache block
 private:
     int size;       // number of slots
     int blockSize;
-    vector<CacheLine> lines;    // actual storage
+    int ways;
+    vector<vector<CacheLine>> sets;    // actual storage
 
 public:
-    Cache(int size, int blockSize);        // creates a cache block with this constructor of size size
+    Cache(int size, int blockSize, int ways);        // creates a cache block with this constructor of size size
     bool access(int address);   // this function is for 
-    vector<CacheLine> getCache();
+    vector<vector<CacheLine>> getCache();
 };
 
 #endif
